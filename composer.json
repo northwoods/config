@@ -33,10 +33,7 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "Sinergi\\Config\\Tests\\": [
-        "tests/Config/Tests",
-        "tests/Config/Tests/_includes"
-      ]
+      "Sinergi\\Config\\Tests\\": "tests/"
     }
   },
   "extra": {
