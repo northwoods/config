@@ -63,7 +63,8 @@ class Factory implements RequiresMandatoryOptions, RequiresConfig
         ];
     }
 
-    public function dimensions() {
+    public function dimensions()
+    {
         return [];
     }
 }
