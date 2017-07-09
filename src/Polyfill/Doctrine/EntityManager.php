@@ -123,7 +123,8 @@ class EntityManager implements RequiresMandatoryOptions, RequiresConfigId
         ];
     }
 
-    public function dimensions() {
+    public function dimensions()
+    {
         return [];
     }
 }
