@@ -1,9 +1,9 @@
 <?php
 
-namespace Sinergi\Config;
+namespace Northwoods\Config;
 
 use Dotenv\Dotenv;
-use Sinergi\Config\Path\PathCollection;
+use Northwoods\Config\Path\PathCollection;
 
 class Configuration
 {

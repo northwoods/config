@@ -1,9 +1,9 @@
 {
-  "name": "sinergi/config",
+  "name": "northwoods/config",
   "type": "library",
   "description": "PHP configurations loading",
   "keywords": ["Config", "Configurations", "Loading", "Management"],
-  "homepage": "https://github.com/sinergi/config",
+  "homepage": "https://github.com/northwoods/config",
   "license": "MIT",
   "authors": [
     {
@@ -13,6 +13,10 @@
     {
       "name": "Jenner",
       "email": "hypxm@qq.com"
+    },
+    {
+      "name": "Woody Gilk",
+      "email": "woody.gilk@gmail.com"
     }
   ],
   "require": {
@@ -29,12 +33,12 @@
   },
   "autoload": {
     "psr-4": {
-      "Sinergi\\Config\\": "src"
+      "Northwoods\\Config\\": "src"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Sinergi\\Config\\Tests\\": "tests/"
+      "Northwoods\\Config\\Tests\\": "tests/"
     }
   },
   "extra": {

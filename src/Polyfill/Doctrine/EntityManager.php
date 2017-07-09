@@ -1,6 +1,6 @@
 <?php
 
-namespace Sinergi\Config\Polyfill\Doctrine;
+namespace Northwoods\Config\Polyfill\Doctrine;
 
 use Doctrine\Common\Annotations\AnnotationReader;
 use Doctrine\ORM\Mapping\DefaultQuoteStrategy;

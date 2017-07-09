@@ -1,15 +1,13 @@
 # Config
 
-[![Build Status](https://travis-ci.org/sinergi/config.svg?branch=develop)](https://travis-ci.org/sinergi/config)
-[![StyleCI](https://styleci.io/repos/15445499/shield)](https://styleci.io/repos/15445499)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/sinergi/config/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/sinergi/config/?branch=master)
-[![Code Coverage](https://scrutinizer-ci.com/g/sinergi/config/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/sinergi/config/?branch=master)
-[![Code Climate](https://codeclimate.com/github/sinergi/config/badges/gpa.svg)](https://codeclimate.com/github/sinergi/config)
-[![Latest Stable Version](http://img.shields.io/packagist/v/sinergi/config.svg?style=flat)](https://packagist.org/packages/sinergi/config)
-[![Total Downloads](https://img.shields.io/packagist/dt/sinergi/config.svg?style=flat)](https://packagist.org/packages/sinergi/config)
-[![License](https://img.shields.io/packagist/l/sinergi/config.svg?style=flat)](https://packagist.org/packages/sinergi/config)
-[![SensioLabsInsight](https://insight.sensiolabs.com/projects/47b2ce95-a810-43dd-823e-482ab8e68ea3/mini.png)](https://insight.sensiolabs.com/projects/47b2ce95-a810-43dd-823e-482ab8e68ea3)
-[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/sinergi/config?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+[![Build Status](https://travis-ci.org/northwoods/config.svg?branch=develop)](https://travis-ci.org/northwoods/config)
+[![StyleCI](https://styleci.io/repos/96575702/shield)](https://styleci.io/repos/96575702)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/northwoods/config/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/northwoods/config/?branch=master)
+[![Code Coverage](https://scrutinizer-ci.com/g/northwoods/config/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/northwoods/config/?branch=master)
+[![Latest Stable Version](http://img.shields.io/packagist/v/northwoods/config.svg?style=flat)](https://packagist.org/packages/northwoods/config)
+[![Total Downloads](https://img.shields.io/packagist/dt/northwoods/config.svg?style=flat)](https://packagist.org/packages/northwoods/config)
+[![License](https://img.shields.io/packagist/l/northwoods/config.svg?style=flat)](https://packagist.org/packages/northwoods/config)
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/da8c11c9-6815-4b4f-a9c4-9897c86cbc46/mini.png)](https://insight.sensiolabs.com/projects/da8c11c9-6815-4b4f-a9c4-9897c86cbc46)
 
 PHP configurations loading library. It is made to enable your application to have different configurations depending on
 the environment it is running in. For example, your application can have different configurations for unit tests, 
@@ -28,7 +26,7 @@ It is recommended that you install the Config library [through composer](http://
 run the Composer command to install the latest stable version of Config:
 
 ```shell
-composer require sinergi/config
+composer require northwoods/config
 ```
 
 ## Usage
@@ -36,7 +34,7 @@ composer require sinergi/config
 Use the factory to instanciate a Config collection class:
 
 ```php
-use Sinergi\Config\Collection;
+use Northwoods\Config\Collection;
 
 $config = Collection::factory([
     'path' => __DIR__ . "/configs"
@@ -49,7 +47,7 @@ the configurations from the directory ``configs/prod/*`` will be loaded on top o
 directory ``configs/*``. Consider the following example:
 
 ```php
-use Sinergi\Config\Collection;
+use Northwoods\Config\Collection;
 
 $config = Collection::factory([
     'path' => __DIR__ . "/configs",
@@ -61,7 +59,7 @@ Optionally, you can also use dotenv to hide sensible information into a `.env` f
 where the `.env` file. Like in this example:
 
 ```php
-use Sinergi\Config\Collection;
+use Northwoods\Config\Collection;
 
 $config = Collection::factory([
     'path' => __DIR__ . "/configs",
@@ -119,7 +117,7 @@ $config->set('database', [
 
 ## Examples
 
-See more examples in the [examples folder](https://github.com/sinergi/config/tree/master/examples).
+See more examples in the [examples folder](https://github.com/northwoods/config/tree/master/examples).
 
 ### PHP Configuration File
 

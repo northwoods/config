@@ -1,6 +1,6 @@
 <?php
 
-namespace Sinergi\Config\Tests;
+namespace Northwoods\Config\Tests;
 
 use PHPUnit_Framework_TestCase;
 

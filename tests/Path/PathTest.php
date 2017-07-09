@@ -1,10 +1,10 @@
 <?php
 
-namespace Sinergi\Config\Tests;
+namespace Northwoods\Config\Tests;
 
 use PHPUnit_Framework_TestCase;
-use Sinergi\Config\Configuration;
-use Sinergi\Config\Path\Path;
+use Northwoods\Config\Configuration;
+use Northwoods\Config\Path\Path;
 
 class PathTest extends PHPUnit_Framework_TestCase
 {
@@ -16,7 +16,7 @@ class PathTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \Sinergi\Config\Path\PathNotFoundException
+     * @expectedException \Northwoods\Config\Path\PathNotFoundException
      */
     public function testConfigConstructorBadPath()
     {

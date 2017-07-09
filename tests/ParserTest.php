@@ -1,9 +1,9 @@
 <?php
 
-namespace Sinergi\Config\Tests;
+namespace Northwoods\Config\Tests;
 
 use PHPUnit_Framework_TestCase;
-use Sinergi\Config\Parser;
+use Northwoods\Config\Parser;
 
 class ParserTest extends PHPUnit_Framework_TestCase
 {

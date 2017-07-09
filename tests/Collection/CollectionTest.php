@@ -1,8 +1,8 @@
 <?php
 
-namespace Sinergi\Config\Tests\Collection;
+namespace Northwoods\Config\Tests\Collection;
 
-use Sinergi\Config\Collection;
+use Northwoods\Config\Collection;
 use PHPUnit_Framework_TestCase;
 
 class CollectionTest extends PHPUnit_Framework_TestCase

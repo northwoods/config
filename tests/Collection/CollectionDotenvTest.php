@@ -1,9 +1,9 @@
 <?php
 
-namespace Sinergi\Config\Tests\Collection;
+namespace Northwoods\Config\Tests\Collection;
 
 use PHPUnit_Framework_TestCase;
-use Sinergi\Config\Collection;
+use Northwoods\Config\Collection;
 
 class CollectionDotenvTest extends PHPUnit_Framework_TestCase
 {
