@@ -153,6 +153,13 @@ And in the `.env` file:
 TIMEZONE="America/Chicago"
 ```
 
+## Original Ownership
+
+This library is a fork of [`sinergi/config`](https://github.com/sinergi/config),
+starting in July 2017, and has changed significantly. Thank you to Gabriel Bull
+for creating the original package!
+
 ## License
 
 Config is licensed under The MIT License (MIT).
+
