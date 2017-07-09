@@ -1,6 +1,6 @@
 <?php
 
-namespace Sinergi\Config\Loader;
+namespace Northwoods\Config\Loader;
 
 class PhpLoader implements LoaderInterface
 {

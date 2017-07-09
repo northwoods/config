@@ -1,9 +1,9 @@
 <?php
 
-namespace Sinergi\Config\Tests\Loader;
+namespace Northwoods\Config\Tests\Loader;
 
 use PHPUnit_Framework_TestCase;
-use Sinergi\Config\Loader\YamlLoader;
+use Northwoods\Config\Loader\YamlLoader;
 
 class YamlLoaderTest extends PHPUnit_Framework_TestCase
 {

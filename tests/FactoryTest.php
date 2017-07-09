@@ -1,10 +1,10 @@
 <?php
 
-namespace Sinergi\Config\Tests;
+namespace Northwoods\Config\Tests;
 
-use Sinergi\Config\Collection;
+use Northwoods\Config\Collection;
 use PHPUnit_Framework_TestCase;
-use Sinergi\Config\Factory;
+use Northwoods\Config\Factory;
 
 class FactoryTest extends PHPUnit_Framework_TestCase
 {

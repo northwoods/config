@@ -1,11 +1,11 @@
 <?php
 
-namespace Sinergi\Config;
+namespace Northwoods\Config;
 
-use Sinergi\Config\Loader\LoaderInterface;
-use Sinergi\Config\Loader\YamlLoader;
-use Sinergi\Config\Path\PathCollection;
-use Sinergi\Config\Loader\PhpLoader;
+use Northwoods\Config\Loader\LoaderInterface;
+use Northwoods\Config\Loader\YamlLoader;
+use Northwoods\Config\Path\PathCollection;
+use Northwoods\Config\Loader\PhpLoader;
 
 class Loader
 {

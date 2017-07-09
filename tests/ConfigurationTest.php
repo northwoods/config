@@ -1,13 +1,13 @@
 <?php
 
-namespace Sinergi\Config\Tests;
+namespace Northwoods\Config\Tests;
 
 use Dotenv\Dotenv;
-use Sinergi\Config\Collection;
+use Northwoods\Config\Collection;
 use PHPUnit_Framework_TestCase;
-use Sinergi\Config\Configuration;
-use Sinergi\Config\Factory;
-use Sinergi\Config\Path\PathCollection;
+use Northwoods\Config\Configuration;
+use Northwoods\Config\Factory;
+use Northwoods\Config\Path\PathCollection;
 
 class ConfigurationTest extends PHPUnit_Framework_TestCase
 {

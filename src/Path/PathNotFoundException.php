@@ -1,6 +1,6 @@
 <?php
 
-namespace Sinergi\Config\Path;
+namespace Northwoods\Config\Path;
 
 use Exception;
 

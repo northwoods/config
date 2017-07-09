@@ -1,6 +1,6 @@
 <?php
 
-namespace Sinergi\Config;
+namespace Northwoods\Config;
 
 use ArrayAccess;
 use ArrayIterator;

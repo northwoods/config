@@ -1,6 +1,6 @@
 <?php
 
-namespace Sinergi\Config;
+namespace Northwoods\Config;
 
 use Interop\Config\ConfigurationTrait;
 use Interop\Config\RequiresMandatoryOptions;
@@ -8,7 +8,7 @@ use Interop\Config\RequiresConfig;
 
 class Factory implements RequiresMandatoryOptions, RequiresConfig
 {
-    const VENDOR_NAME = 'sinergi';
+    const VENDOR_NAME = 'northwoods';
     const PACKAGE_NAME = 'config';
 
     use ConfigurationTrait;

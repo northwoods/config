@@ -1,9 +1,9 @@
 <?php
 
-namespace Sinergi\Config\Path;
+namespace Northwoods\Config\Path;
 
 use Exception;
-use Sinergi\Config\ArrayCollection;
+use Northwoods\Config\ArrayCollection;
 
 /**
  * @method Path get($key)

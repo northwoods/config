@@ -1,6 +1,6 @@
 <?php
 
-namespace Sinergi\Config;
+namespace Northwoods\Config;
 
 require_once __DIR__ . "/DotenvHelper.php";
 
