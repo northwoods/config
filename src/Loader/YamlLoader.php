@@ -6,26 +6,27 @@ use Symfony\Component\Yaml\Parser;
 
 class YamlLoader implements LoaderInterface
 {
-    const EXTENSION = 'yaml';
+    public static function isSupported()
+    {
+        return class_exists(Parser::class);
+    }
 
     /**
      * @var Parser
      */
-    protected static $parser;
+    private $parser;
 
-    /**
-     * @return Parser
-     */
-    protected static function getParser()
+    public function __construct()
     {
-        if (null === self::$parser) {
-            self::$parser = new Parser();
-        }
-        return self::$parser;
+        $this->parser = new Parser();
     }
 
-    public static function load($file)
+    public function load($path)
     {
-        return self::getParser()->parse(file_get_contents($file));
+        if (is_file("$path.yaml")) {
+            return $this->parser->parse(file_get_contents("$path.yaml"));
+        } else {
+            return [];
+        }
     }
 }

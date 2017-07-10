@@ -4,5 +4,14 @@ namespace Northwoods\Config\Loader;
 
 interface LoaderInterface
 {
-    public static function load($file);
+    /**
+     * @return bool
+     */
+    public static function isSupported();
+
+    /**
+     * @param string $path
+     * @return array
+     */
+    public function load($path);
 }
