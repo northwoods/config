@@ -31,7 +31,7 @@ composer require northwoods/config
 
 ## Usage
 
-Use the factory to instanciate a Config collection class:
+Use the factory to instantiate a Config collection class:
 
 ```php
 use Northwoods\Config\Collection;
