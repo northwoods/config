@@ -4,10 +4,17 @@ namespace Northwoods\Config\Loader;
 
 class PhpLoader implements LoaderInterface
 {
-    const EXTENSION = 'php';
-
-    public static function load($file)
+    public static function isSupported()
     {
-        return require $file;
+        return true;
+    }
+
+    public function load($path)
+    {
+        if (is_file("$path.php")) {
+            return require "$path.php";
+        } else {
+            return [];
+        }
     }
 }

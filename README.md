@@ -1,4 +1,4 @@
-# Config
+# Northwoods Config
 
 [![Build Status](https://travis-ci.org/northwoods/config.svg?branch=develop)](https://travis-ci.org/northwoods/config)
 [![StyleCI](https://styleci.io/repos/96575702/shield)](https://styleci.io/repos/96575702)
@@ -9,21 +9,18 @@
 [![License](https://img.shields.io/packagist/l/northwoods/config.svg?style=flat)](https://packagist.org/packages/northwoods/config)
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/da8c11c9-6815-4b4f-a9c4-9897c86cbc46/mini.png)](https://insight.sensiolabs.com/projects/da8c11c9-6815-4b4f-a9c4-9897c86cbc46)
 
-PHP configurations loading library. It is made to enable your application to have different configurations depending on
-the environment it is running in. For example, your application can have different configurations for unit tests, 
-development, staging and production. 
+PHP configuration loading library. It is made to enable your application to have
+different configurations depending on the environment it is running in. For example,
+your application can have different configurations for testing, development, staging,
+and production. 
 
-A good practice would be to __not include__ your production or staging configurations in your version control.
-To do this, Config supports [Dotenv](https://github.com/vlucas/phpdotenv).
-
-## Requirements
-
-This library uses PHP 5.6+.
+It is **not recommended** to include your staging or production configuration in
+version control! To support system specific configuration, you may install
+[`josegonzalez/dotenv`](https://github.com/josegonzalez/php-dotenv).
 
 ## Installation
 
-It is recommended that you install the Config library [through composer](http://getcomposer.org/). To do so, 
-run the Composer command to install the latest stable version of Config:
+The best way to install and use this package is  [through composer](http://getcomposer.org/):
 
 ```shell
 composer require northwoods/config
@@ -31,88 +28,138 @@ composer require northwoods/config
 
 ## Usage
 
-Use the factory to instantiate a Config collection class:
+There are several different ways to use this package. The most simple is to use
+the static factory:
 
 ```php
-use Northwoods\Config\Collection;
+use Northwoods\Config\ConfigFactory;
 
-$config = Collection::factory([
-    'path' => __DIR__ . "/configs"
+$config = ConfigFactory::make([
+    'directory' => __DIR__ . '/config',
 ]);
 ```
 
-Optionally, you can also setup the environment. Setting up the environment will merge normal configurations 
-with configurations in the environment directory. For example, if you setup the environment to be *prod*, 
-the configurations from the directory ``configs/prod/*`` will be loaded on top of the configurations from the 
-directory ``configs/*``. Consider the following example:
+Configuration can now be read using a "dot path":
 
 ```php
-use Northwoods\Config\Collection;
+$token = $config->get('app.timezone');
+```
 
-$config = Collection::factory([
-    'path' => __DIR__ . "/configs",
-    'environment' => 'prod'
+This will load `config/app.php` and return the `timezone` key, if it exists.
+
+Optionally, an environment can be set that will add an additional search path:
+
+```php
+$config = ConfigFactory::make([
+    'directory' => __DIR__ . '/config',
+    'environment' => 'dev',
 ]);
 ```
 
-Optionally, you can also use dotenv to hide sensible information into a `.env` file. To do so, specify a directory
-where the `.env` file. Like in this example:
+Now when `app.timezone` is requested, both `config/dev/app.php` and `config/app.php`
+will be searched for the `timezone` key and the first result will be returned.
+
+### Best Practice
+
+It is **not recommended** to add your staging or production secrets to
+configuration files that are checked into source control.
+A better solution is to use an env loader such as
+[`josegonzalez/dotenv`](https://github.com/josegonzalez/php-dotenv) or
+[`vlucas/phpdotenv`](https://github.com/vlucas/phpdotenv). This will allow writing
+PHP configuration files that read from `getenv`:
 
 ```php
-use Northwoods\Config\Collection;
+return [
+    'database' => [
+        'password' => getenv('DATABASE_PASSWORD')
+    ],
+];
+```
 
-$config = Collection::factory([
-    'path' => __DIR__ . "/configs",
-    'dotenv' => __DIR__,
-    'environment' => 'prod'
+Refer the package documentation for how to populate env values from a `.env` file.
+
+### YAML Files
+
+YAML configuration files are supported when the [`symfony/yaml`](https://github.com/symfony/yaml)
+package is installed:
+
+```php
+$config = ConfigFactory::make([
+    'directory' => __DIR__ . '/config',
+    'environment' => 'dev',
+    'type' => 'yaml'
 ]);
 ```
 
-You can than use the configurations like this:
+**Note:** This assumes that all configuration files have a `.yaml` extension!
+If you wish to combine PHP and YAML files, create a custom `ConfigCollection`
+with `ConfigFactory`.
+
+## `ConfigInterface`
+
+All configuration containers must implement `ConfigInterface`.
+
+### `get()`
+
+Configuration values are accessed using the `get($path, $default)` method.
+
+The first parameter is a "dot path" to search for in the form `file.key.extra`.
+An unlimited depth is supported.
+
+The second parameter is a default value that will be returned if the path cannot
+be resolved. If the default is not provided `null` will be used.
 
 ```php
-$config->get('app.timezone');
+// If not defined, $timezone will be null
+$timezone = $config->get('app.timezone');
+
+// If not defined, $timezone will be "UTC"
+$timezone = $config->get('app.timezone', 'UTC');
 ```
 
-## Getter
+### `set()`
 
-The configuration getter uses a simple syntax: ``file_name.array_key``.
+Configuration values can also be set at runtime using the `set($path, $value)` method.
 
-For example:
+The first parameter is a "dot path" to set in the form `file.key.extra`.
+An unlimited depth is supported.
+
+The second parameter is the value to set for the path.
 
 ```php
-$config->get('app.timezone');
+$config->set('app.timezone', 'Europe/Berlin');
 ```
 
-You can optionally set a default value like this:
+### Classes
+
+The following classes are part of this package:
+
+- `ConfigFactory` - factory for configuration containers
+- `ConfigDirectory` - container that reads a single directory
+- `ConfigCollection` - container that reads from an collection of containers
+- `Loader\LoaderFactory` - factory for configuration readers
+- `Loader\PhpLoader` - reader for `.php` configuration files
+- `Loader\YamlLoader` - reader for `.yaml` configuration files
+
+### Functions
+
+Getting and setting functionality is implemented by `array_path` and `array_path_set`:
 
 ```php
-$config->get('app.timezone', "America/New_York");
-```
+use function Northwoods\Config\array_path;
+use function Northwoods\Config\array_path_set;
 
-You can use the getter to access multidimensional arrays in your configurations:
+$config = [
+    'service' => [
+        'uri' => 'http://api.example.com/'
+    ],
+];
 
-```php
-$config->get('database.connections.default.host');
-```
+// get a value from an array
+$uri = array_path($config, 'service.uri');
 
-## Setter
-
-Alternatively, you can set configurations from your application code:
-
-```php
-$config->set('app.timezone', "Europe/Berlin");
-```
-
-You can set entire arrays of configurations:
-
-```php
-$config->set('database', [
-    'host' => "localhost",
-    'dbname' => "my_database",
-    'user' => "my_user",
-    'password' => "my_password"
-]);
+// set a value in an array
+$config = array_path_set($config, 'service.uri', 'https://api.example.com/v2/')
 ```
 
 ## Examples
@@ -129,28 +176,12 @@ return [
 ];
 ```
 
-### Yaml Configuration File
+### YAML Configuration File
 
 Example of a YAML configuration file:
 
 ```yaml
 timezone: America/New_York
-```
-
-### Dotenv
-
-Example of using Dotenv in a PHP configuration file:
-
-```php
-return [
-    'timezone' => env('TIMEZONE', "America/New_York")
-];
-```
-
-And in the `.env` file:
-
-```
-TIMEZONE="America/Chicago"
 ```
 
 ## Original Ownership
