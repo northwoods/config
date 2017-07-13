@@ -21,7 +21,8 @@ install:
   - if [[ $MINIMUM_VERSIONS = true ]]; then composer update --no-interaction --prefer-lowest; fi
 
 script:
-  - vendor/bin/phpunit
+  - composer test
+  - composer check
 
 after_script:
   - |
