@@ -5,7 +5,7 @@ namespace Northwoods\Config;
 class ConfigCollection implements ConfigInterface
 {
     /**
-     * @var ConfigInterface
+     * @var ConfigInterface[]
      */
     private $configs;
 

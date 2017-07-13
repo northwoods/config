@@ -12,7 +12,7 @@ class ConfigDirectory implements ConfigInterface
     private $path;
 
     /**
-     * @var ConfigFactory
+     * @var LoaderInterface
      */
     private $loader;
 
