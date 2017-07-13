@@ -3,7 +3,7 @@
 return [
     'connections' => [
         'default' => [
-            'password' => "xxxxxxxxxxxxxxxxxxx"
+            'password' => 'production-password'
         ]
     ]
 ];

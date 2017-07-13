@@ -1,54 +1,69 @@
 {
-  "name": "northwoods/config",
-  "type": "library",
-  "description": "PHP configurations loading",
-  "keywords": ["Config", "Configurations", "Loading", "Management"],
-  "homepage": "https://github.com/northwoods/config",
-  "license": "MIT",
-  "authors": [
-    {
-      "name": "Gabriel Bull",
-      "email": "me@gabrielbull.com"
+    "name": "northwoods/config",
+    "type": "library",
+    "description": "Simple configuration loader",
+    "homepage": "https://github.com/northwoods/config",
+    "license": "MIT",
+    "keywords": [
+        "config",
+        "configuration",
+        "loading",
+        "management",
+        "directory",
+        "yaml",
+        "php"
+    ],
+    "authors": [
+        {
+            "name": "Gabriel Bull",
+            "email": "me@gabrielbull.com"
+        },
+        {
+            "name": "Jenner",
+            "email": "hypxm@qq.com"
+        },
+        {
+            "name": "Woody Gilk",
+            "email": "woody.gilk@gmail.com"
+        }
+    ],
+    "config": {
+        "sort-packages": true
     },
-    {
-      "name": "Jenner",
-      "email": "hypxm@qq.com"
+    "minimum-stability": "stable",
+    "require": {
+        "php": ">=5.6"
     },
-    {
-      "name": "Woody Gilk",
-      "email": "woody.gilk@gmail.com"
+    "require-dev": {
+        "eloquent/phony-phpunit": "^1.0",
+        "phpunit/phpunit": "^5.7",
+        "squizlabs/php_codesniffer": "^3.0",
+        "symfony/yaml": "^2.8 || ^3.0"
+    },
+    "suggest": {
+       "josegonzalez/dotenv": "Adds support for loading .env files",
+       "symfony/yaml": "Adds support for loading .yaml files"
+    },
+    "autoload": {
+        "files": [
+            "src/functions.php"
+        ],
+        "psr-4": {
+            "Northwoods\\Config\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Northwoods\\Config\\": "tests/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-develop": "0.6.3-dev"
+        }
+    },
+    "scripts": {
+        "test": "phpunit",
+        "check": "phpcs -n"
     }
-  ],
-  "require": {
-    "php": ">=5.6",
-    "sandrokeil/interop-config": "^1.0",
-    "psr/container": "^1.0",
-    "vlucas/phpdotenv": "^2.0",
-    "symfony/yaml": "^2.8 || ^3.0"
-  },
-  "require-dev": {
-    "phpunit/phpunit": "^5.7",
-    "doctrine/orm": "^2.5",
-    "squizlabs/php_codesniffer": "^3.0"
-  },
-  "autoload": {
-    "psr-4": {
-      "Northwoods\\Config\\": "src"
-    }
-  },
-  "autoload-dev": {
-    "psr-4": {
-      "Northwoods\\Config\\Tests\\": "tests/"
-    }
-  },
-  "extra": {
-    "branch-alias": {
-      "dev-develop": "0.6.3-dev"
-    }
-  },
-  "scripts": {
-    "check": "phpcs -n --standard=psr2 src tests"
-  },
-  "minimum-stability": "dev",
-  "prefer-stable": true
 }

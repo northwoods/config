@@ -1,18 +1,108 @@
 <?php
 
-namespace Northwoods\Config\Tests;
+namespace Northwoods\Config;
 
-use Northwoods\Config\Collection;
-use PHPUnit_Framework_TestCase;
-use Northwoods\Config\Factory;
+use PHPUnit\Framework\TestCase;
 
-class FactoryTest extends PHPUnit_Framework_TestCase
+class FactoryTest extends TestCase
 {
-    public function testFactory()
+    /**
+     * @var ConfigFactory
+     */
+    private $factory;
+
+    public function setUp()
     {
-        $factory = new Factory();
-        /** @var Collection $collection */
-        $collection = $factory([]);
-        $this->assertInstanceOf(Collection::class, $collection);
+        $this->factory = new ConfigFactory();
+    }
+
+    public function testDirectory()
+    {
+        $config = ConfigFactory::make([
+            'directory' => __DIR__ . '/../examples',
+        ]);
+
+        // it implements the configuration interfaces
+        $this->assertInstanceOf(ConfigInterface::class, $config);
+        $this->assertInstanceOf(ConfigDirectory::class, $config);
+
+        // it can fetch existing values
+        $this->assertSame('America/New_York', $config->get('app.timezone'));
+        $this->assertSame('my_password', $config->get('database.connections.default.password'));
+
+        // it returns null for values that do not exist
+        $this->assertNull($config->get('custom.key.option'));
+
+        // it can set custom values
+        $this->assertNull($config->set('custom.key.option', true));
+        $this->assertTrue($config->get('custom.key.option'));
+    }
+
+    public function testEnvironment()
+    {
+        $config = ConfigFactory::make([
+            'directory' => __DIR__ . '/../examples',
+            'environment' => 'dev',
+        ]);
+
+        // it implements the configuration interfaces
+        $this->assertInstanceOf(ConfigInterface::class, $config);
+        $this->assertInstanceOf(ConfigCollection::class, $config);
+
+        // it can fetch existing values
+        $this->assertSame('Europe/Berlin', $config->get('app.timezone'));
+
+        // it returns null for values that do not exist
+        $this->assertNull($config->get('custom.key.option'));
+
+        // it can set custom values
+        $this->assertNull($config->set('custom.key.option', true));
+        $this->assertTrue($config->get('custom.key.option'));
+
+        // new environments can be created
+        $config = ConfigFactory::make([
+            'directory' => __DIR__ . '/../examples',
+            'environment' => 'prod',
+        ]);
+
+        // it can fetch existing values
+        $this->assertSame('America/New_York', $config->get('app.timezone'));
+    }
+
+    public function testYamlDirectory()
+    {
+        $config = ConfigFactory::make([
+            'directory' => __DIR__ . '/../examples',
+            'environment' => 'dev',
+            'type' => 'yaml',
+        ]);
+
+        // it implements the configuration interfaces
+        $this->assertInstanceOf(ConfigInterface::class, $config);
+        $this->assertInstanceOf(ConfigCollection::class, $config);
+
+        // it can fetch existing values
+        $this->assertSame(['shadowhand'], $config->get('users.admins'));
+        $this->assertSame(['ada'], $config->get('users.developers'));
+
+        // it returns null for values that do not exist
+        $this->assertNull($config->get('custom.key.option'));
+
+        // it can set custom values
+        $this->assertNull($config->set('custom.key.option', true));
+        $this->assertTrue($config->get('custom.key.option'));
+
+        // new environments can be created
+        $config = ConfigFactory::make([
+            'directory' => __DIR__ . '/../examples',
+            'environment' => 'prod',
+            'type' => 'yaml',
+        ]);
+
+        // it can fetch existing values
+        $this->assertSame(['shadowhand'], $config->get('users.admins'));
+
+        // it returns null for values that do not exist
+        $this->assertNull($config->get('users.developers'));
     }
 }
