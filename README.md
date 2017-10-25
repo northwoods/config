@@ -95,6 +95,29 @@ $config = ConfigFactory::make([
 If you wish to combine PHP and YAML files, create a custom `ConfigCollection`
 with `ConfigFactory`.
 
+### Decorators
+
+It is also possible to replace variables in configuration by using the `VariableDecorator`.
+This allows you to define variables at runtime without changing configuration:
+
+```php
+use Northwoods\Config\Decorator\VariableDecorator;
+
+// Wrap any existing configuration with the decorator
+$config = new VariableDecorator($config);
+$config->setVariables(['%cacheDir%' => '/tmp']);
+```
+
+Now any configuration value that contains `%cacheDir%` will have it replaced with `/tmp`:
+
+```php
+return [
+    'emails' => '%cacheDir%/emails',
+];
+```
+
+Would resolve to `/tmp/emails` when decorated.
+
 ## `ConfigInterface`
 
 All configuration containers must implement `ConfigInterface`.
@@ -137,6 +160,7 @@ The following classes are part of this package:
 - `ConfigFactory` - factory for configuration containers
 - `ConfigDirectory` - container that reads a single directory
 - `ConfigCollection` - container that reads from an collection of containers
+- `Decorator\VariableDecorator` - decorator to support variable replacement in configuration values
 - `Loader\LoaderFactory` - factory for configuration readers
 - `Loader\PhpLoader` - reader for `.php` configuration files
 - `Loader\YamlLoader` - reader for `.yaml` configuration files
