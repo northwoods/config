@@ -67,6 +67,17 @@ class FactoryTest extends TestCase
 
         // it can fetch existing values
         $this->assertSame('America/New_York', $config->get('app.timezone'));
+
+        // it will merge base config + prod config
+        $this->assertSame([
+            'default' => [
+                'driver' => 'pdo_mysql',
+                'host' => '127.0.0.1',
+                'dbname' => 'my_database',
+                'user' => 'my_user',
+                'password' => 'production-password',
+            ]
+        ], $config->get('database.connections'));
     }
 
     public function testYamlDirectory()
