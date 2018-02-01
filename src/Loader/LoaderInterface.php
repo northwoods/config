@@ -1,17 +1,17 @@
 <?php
+declare(strict_types=1);
 
 namespace Northwoods\Config\Loader;
 
 interface LoaderInterface
 {
     /**
-     * @return bool
+     * Can this loader be used in the current environment?
      */
-    public static function isSupported();
+    public static function isSupported(): bool;
 
     /**
-     * @param string $path
-     * @return array
+     * Load a configuration by path.
      */
-    public function load($path);
+    public function load(string $path): array;
 }

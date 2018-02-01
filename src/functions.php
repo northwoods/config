@@ -1,14 +1,13 @@
 <?php
+declare(strict_types=1);
 
 namespace Northwoods\Config;
 
 /**
- * @param array $config
- * @param string $dotPath
  * @param mixed $default
  * @return mixed
  */
-function array_path(array $config, $dotPath, $default = null)
+function array_path(array $config, string $dotPath, $default = null)
 {
     // Working from the first key, descend into the array until nothing is found
     return array_reduce(
@@ -21,12 +20,9 @@ function array_path(array $config, $dotPath, $default = null)
 }
 
 /**
- * @param array $config
- * @param string $dotPath
  * @param mixed $value
- * @return array
  */
-function array_path_set(array $config, $dotPath, $value)
+function array_path_set(array $config, string $dotPath, $value): array
 {
     // Work backward from the last key, wrapping each key in an array
     $replace = array_reduce(

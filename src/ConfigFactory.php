@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Northwoods\Config;
 
@@ -6,10 +7,7 @@ use Northwoods\Config\Loader\LoaderFactory;
 
 class ConfigFactory
 {
-    /**
-     * @return ConfigInterface
-     */
-    public static function make(array $options, LoaderFactory $loader = null)
+    public static function make(array $options, LoaderFactory $loader = null): ConfigInterface
     {
         $factory = new static($loader);
         $type = array_path($options, 'type', 'php');
@@ -21,9 +19,7 @@ class ConfigFactory
         return $factory->forDirectory($options['directory'], $type);
     }
 
-    /**
-     * @var LoaderFactory
-     */
+    /** @var LoaderFactory */
     private $loader;
 
     public function __construct(LoaderFactory $loader = null)
@@ -31,21 +27,12 @@ class ConfigFactory
         $this->loader = $loader ?: new LoaderFactory();
     }
 
-    /**
-     * @param string $directory
-     * @return ConfigDirectory
-     */
-    public function forDirectory($directory, $type = 'php')
+    public function forDirectory(string $directory, string $type = 'php'): ConfigDirectory
     {
         return new ConfigDirectory($directory, $this->loader->forType($type));
     }
 
-    /**
-     * @param string $directory
-     * @param string $environment
-     * @return ConfigCollection
-     */
-    public function forEnvironment($directory, $environment, $type = 'php')
+    public function forEnvironment(string $directory, string $environment, string $type = 'php'): ConfigCollection
     {
         return new ConfigCollection(
             $this->forDirectory("$directory/$environment", $type),

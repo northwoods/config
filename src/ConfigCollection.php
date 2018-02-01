@@ -1,12 +1,11 @@
 <?php
+declare(strict_types=1);
 
 namespace Northwoods\Config;
 
 class ConfigCollection implements ConfigInterface
 {
-    /**
-     * @var ConfigInterface[]
-     */
+    /** @var ConfigInterface[] */
     private $configs;
 
     public function __construct(ConfigInterface ...$configs)
@@ -14,38 +13,30 @@ class ConfigCollection implements ConfigInterface
         $this->configs = $configs;
     }
 
-    /**
-     * @param string $dotPath
-     * @param mixed  $default
-     *
-     * @return mixed
-     */
-    public function get($dotPath, $default = null)
+    public function get(string $dotPath, $default = null)
     {
-        $found = null;
-
-        foreach (array_reverse($this->configs) as $config) {
-
-            /** @var ConfigInterface $config */
-
-            $value = $config->get($dotPath, null);
-
-            if ($value === null) {
-                continue;
-            }
-
-            if (is_array($found) && is_array($value)) {
-                $found = array_replace_recursive($found, $value);
-            } else {
-                $found = $value;
-            }
-        }
-
-        return $found ?? $default;
+        return array_reduce(array_reverse($this->configs), $this->reducer($dotPath), $default);
     }
 
-    public function set($dotPath, $value)
+    public function set(string $dotPath, $value)
     {
         $this->configs[0]->set($dotPath, $value);
+    }
+
+    private function reducer(string $dotPath): callable
+    {
+        return static function ($currentValue, ConfigInterface $config) use ($dotPath) {
+            $found = $config->get($dotPath, null);
+
+            if ($found === null) {
+                return $currentValue;
+            }
+
+            if (is_array($currentValue) && is_array($found)) {
+                return array_replace_recursive($currentValue, $found);
+            }
+
+            return $found;
+        };
     }
 }

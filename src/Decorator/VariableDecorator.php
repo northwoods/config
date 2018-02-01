@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Northwoods\Config\Decorator;
 
@@ -6,14 +7,10 @@ use Northwoods\Config\ConfigInterface;
 
 class VariableDecorator implements ConfigInterface
 {
-    /**
-     * @var ConfigInterface
-     */
+    /** @var ConfigInterface */
     private $config;
 
-    /**
-     * @var array [ key => value, ... ]
-     */
+    /** @var array */
     private $variables = [];
 
     public function __construct(ConfigInterface $config)
@@ -21,25 +18,18 @@ class VariableDecorator implements ConfigInterface
         $this->config = $config;
     }
 
-    /**
-     * Define variables to replace
-     *
-     * @return self
-     */
-    public function setVariables(array $map)
+    public function setVariables(array $map): self
     {
         $this->variables = $map;
         return $this;
     }
 
-    // ConfigInterface
-    public function get($dotPath, $default = null)
+    public function get(string $dotPath, $default = null)
     {
         return $this->replaceVariables($this->config->get($dotPath));
     }
 
-    // ConfigInterface
-    public function set($dotPath, $value)
+    public function set(string $dotPath, $value)
     {
         return $this->config->set($dotPath, $value);
     }

@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Northwoods\Config;
 
@@ -6,19 +7,13 @@ use Northwoods\Config\Loader\LoaderInterface;
 
 class ConfigDirectory implements ConfigInterface
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     private $path;
 
-    /**
-     * @var LoaderInterface
-     */
+    /** @var LoaderInterface */
     private $loader;
 
-    /**
-     * @var array
-     */
+    /** @var array */
     private $config = [];
 
     public function __construct($path, LoaderInterface $loader)
@@ -27,7 +22,7 @@ class ConfigDirectory implements ConfigInterface
         $this->loader = $loader;
     }
 
-    public function get($dotPath, $default = null)
+    public function get(string $dotPath, $default = null)
     {
         list($name) = explode('.', $dotPath, 2);
 
@@ -38,7 +33,7 @@ class ConfigDirectory implements ConfigInterface
         return array_path($this->config, $dotPath, $default);
     }
 
-    public function set($dotPath, $value)
+    public function set(string $dotPath, $value)
     {
         $this->config = array_path_set($this->config, $dotPath, $value);
     }
